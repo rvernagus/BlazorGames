@@ -78,50 +78,24 @@
 
     public bool CanMakePlay(PlayType type)
     {
-        switch (type)
+        return type switch
         {
-            case PlayType.Ones:
-                return Dice.HasThreeOnes();
-
-            case PlayType.Twos:
-                return Dice.HasThreeTwos();
-
-            case PlayType.Threes:
-                return Dice.HasThreeThrees();
-
-            case PlayType.Fours:
-                return Dice.HasThreeFours();
-
-            case PlayType.Fives:
-                return Dice.HasThreeFives();
-
-            case PlayType.Sixes:
-                return Dice.HasThreeSixes();
-
-            case PlayType.Yahtzee:
-            case PlayType.BonusYahtzee:
-                return Dice.HasYahtzee();
-
-            case PlayType.ThreeOfAKind:
-                return Dice.HasThreeOfAKind();
-
-            case PlayType.FourOfAKind:
-                return Dice.HasFourOfAKind();
-
-            case PlayType.FullHouse:
-                return Dice.HasFullHouse();
-
-            case PlayType.SmallStraight:
-                return Dice.HasSmallStraight();
-
-            case PlayType.LargeStraight:
-                return Dice.HasLargeStraight();
-
-            case PlayType.Chance:
-                return true;
-
-            default: return false;
-        }
+            PlayType.Ones => Dice.HasThreeOnes(),
+            PlayType.Twos => Dice.HasThreeTwos(),
+            PlayType.Threes => Dice.HasThreeThrees(),
+            PlayType.Fours => Dice.HasThreeFours(),
+            PlayType.Fives => Dice.HasThreeFives(),
+            PlayType.Sixes => Dice.HasThreeSixes(),
+            PlayType.Yahtzee |
+            PlayType.BonusYahtzee => Dice.HasYahtzee(),
+            PlayType.ThreeOfAKind => Dice.HasThreeOfAKind(),
+            PlayType.FourOfAKind => Dice.HasFourOfAKind(),
+            PlayType.FullHouse => Dice.HasFullHouse(),
+            PlayType.SmallStraight => Dice.HasSmallStraight(),
+            PlayType.LargeStraight => Dice.HasLargeStraight(),
+            PlayType.Chance => true,
+            _ => false
+        };
     }
 
     public void ClaimPlay(PlayType type)
