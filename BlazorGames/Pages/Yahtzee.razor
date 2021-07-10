@@ -76,9 +76,8 @@
         Dice.ReleaseHold();
     }
 
-    public bool CanMakePlay(PlayType type)
-    {
-        return type switch
+    public bool CanMakePlay(PlayType type) =>
+        type switch
         {
             PlayType.Ones => Dice.HasThreeOnes(),
             PlayType.Twos => Dice.HasThreeTwos(),
@@ -96,7 +95,6 @@
             PlayType.Chance => true,
             _ => false
         };
-    }
 
     public void ClaimPlay(PlayType type)
     {
