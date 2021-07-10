@@ -128,24 +128,17 @@
         NextTurn();
     }
 
-    public string GetRank()
-    {
-        if (!IsGameOver) return "Finish the game first!";
-
-        if (TotalScore <= 112) return "D";
-
-        if (TotalScore > 112 && TotalScore <= 168) return "C";
-
-        if (TotalScore > 168 && TotalScore <= 224) return "B";
-
-        if (TotalScore > 224 && TotalScore <= 280) return "A";
-
-        if (TotalScore > 280 && TotalScore <= 364) return "S";
-
-        if (TotalScore > 364) return "S+";
-
-        return "";
-    }
+    public string GetRank() =>
+        TotalScore switch
+        {
+            _ when !IsGameOver => "Finish the game first!",
+            <= 112 => "D",
+            > 112 and <= 168 => "C",
+            > 168 and <= 224 => "B",
+            > 224 and <= 280 => "A",
+            > 280 and <= 364 => "S",
+            > 364 => "S+",
+        };
 }
 
 <div class="container">
