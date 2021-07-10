@@ -126,64 +126,26 @@
 
     public void ClaimPlay(PlayType type)
     {
-        switch (type)
+        var value = type switch
         {
-            case PlayType.Ones:
-                PlaysMade.Add(type, Dice.GetSumOf(1));
-                break;
+            PlayType.Ones => Dice.GetSumOf(1),
+            PlayType.Twos => Dice.GetSumOf(2),
+            PlayType.Threes => Dice.GetSumOf(3),
+            PlayType.Fours => Dice.GetSumOf(4),
+            PlayType.Fives => Dice.GetSumOf(5),
+            PlayType.Sixes => Dice.GetSumOf(6),
+            PlayType.Yahtzee => 50,
+            PlayType.BonusYahtzee => 100,
+            PlayType.ThreeOfAKind => Dice.GetOfAKindTotal(3),
+            PlayType.FourOfAKind => Dice.GetOfAKindTotal(4),
+            PlayType.FullHouse => 25,
+            PlayType.SmallStraight => 30,
+            PlayType.LargeStraight => 40,
+            PlayType.Chance => Dice.Dice.Sum(x => x.Value),
+            _ => throw new ArgumentException("Invalid value", nameof(type))
+        };
 
-            case PlayType.Twos:
-                PlaysMade.Add(type, Dice.GetSumOf(2));
-                break;
-
-            case PlayType.Threes:
-                PlaysMade.Add(type, Dice.GetSumOf(3));
-                break;
-
-            case PlayType.Fours:
-                PlaysMade.Add(type, Dice.GetSumOf(4));
-                break;
-
-            case PlayType.Fives:
-                PlaysMade.Add(type, Dice.GetSumOf(5));
-                break;
-
-            case PlayType.Sixes:
-                PlaysMade.Add(type, Dice.GetSumOf(6));
-                break;
-
-            case PlayType.Yahtzee:
-                PlaysMade.Add(type, 50);
-                break;
-
-            case PlayType.BonusYahtzee:
-                PlaysMade.Add(type, 100);
-                break;
-
-            case PlayType.ThreeOfAKind:
-                PlaysMade.Add(type, Dice.GetOfAKindTotal(3));
-                break;
-
-            case PlayType.FourOfAKind:
-                PlaysMade.Add(type, Dice.GetOfAKindTotal(4));
-                break;
-
-            case PlayType.FullHouse:
-                PlaysMade.Add(type, 25);
-                break;
-
-            case PlayType.SmallStraight:
-                PlaysMade.Add(type, 30);
-                break;
-
-            case PlayType.LargeStraight:
-                PlaysMade.Add(type, 40);
-                break;
-
-            case PlayType.Chance:
-                PlaysMade.Add(type, Dice.Dice.Sum(x => x.Value));
-                break;
-        }
+        PlaysMade.Add(type, value);
 
         NextTurn();
     }
