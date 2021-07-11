@@ -16,23 +16,18 @@
 
     public int RollsRemaining { get; set; } = 3;
 
-    public bool IsStartOfTurn { get { return RollsRemaining >= 3; } }
-
-    public bool IsGameOver { get { return TurnsRemaining <= 0; } }
-
     public bool ShowRules { get; set; }
 
-    public int TotalScore
-    {
-        get
+    public bool IsStartOfTurn => RollsRemaining >= 3;
+
+    public bool IsGameOver => TurnsRemaining <= 0;
+
+    public int TotalScore =>
+        PlaysMade.HasBonus() switch
         {
-            if (PlaysMade.HasBonus())
-            {
-                return PlaysMade.GetTotal() + 35;
-            }
-            return PlaysMade.GetTotal();
-        }
-    }
+            true => PlaysMade.GetTotal() + 35,
+            false => PlaysMade.GetTotal()
+        };
 
     public Yahtzee()
     {
