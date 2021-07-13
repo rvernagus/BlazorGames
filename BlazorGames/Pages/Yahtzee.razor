@@ -149,11 +149,11 @@
                 <div class="col">
                     @if (RollsRemaining > 0 && !IsGameOver)
                     {
-                        <button class="btn btn-primary" @onclick:preventDefault @onclick="@(() => RollDice())">Roll</button>
+                        <button class="btn btn-primary" @onclick:preventDefault @onclick="RollDice">Roll</button>
                     }
                     else if (IsGameOver)
                     {
-                        <button class="btn btn-success" @onclick="@(() => Initialize())">Reset</button>
+                        <button class="btn btn-success" @onclick="Initialize">Reset</button>
                         <text>Thanks for playing!<br />Final score: @TotalScore <br />Rank: @GetRank()</text>
                     }
                     else
@@ -194,11 +194,11 @@
                             }
                             else if (CanMakePlay(type) && !IsStartOfTurn)
                             {
-                                <a class="btn btn-primary btn-sm" @onclick="@(() => ClaimPlay(type))">Claim</a>
+                                <a class="btn btn-primary btn-sm" @onclick="() => ClaimPlay(type)">Claim</a>
                             }
                             else if (RollsRemaining == 0)
                             {
-                                <a class="btn btn-outline-secondary btn-sm" @onclick="@(() => ScratchPlay(type))">Scratch</a>
+                                <a class="btn btn-outline-secondary btn-sm" @onclick="() => ScratchPlay(type)">Scratch</a>
                             }
                         </div>
                     </div>
